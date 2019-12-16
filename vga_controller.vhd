@@ -71,12 +71,16 @@ begin
       
       
       h_sync <= '1' when (h_count_reg >=(HD+HF)) and (h_count_reg<=(HD+HF+HR-uno)) else '0'; 
-      v_sync <= '1' when (v_count_reg >=(HD+HF)) and (v_count_reg<=(HD+HF+HR-uno)) else '0'; 
+      v_sync <= '1' when (v_count_reg >=(VD+VF)) and (v_count_reg<=(VD+VF+VR-uno)) else '0'; 
 
       -- status
 			h_end <= '1' when h_count_reg=(HD+HF+HB+HR-uno) else '0';
       v_end <= '1' when v_count_reg=(VD+VF+VB+VR-uno) else '0'; 
       -- video on/off 
       video_on <='1' when (h_count_reg<HD) and (v_count_reg<VD) else  '0'; 
+      pixel_x <= STD_LOGIC_VECTOR(h_count_reg);
+      pixel_y <= STD_LOGIC_VECTOR(v_count_reg);
+
+
 
 end Behavioral;
